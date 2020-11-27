@@ -9,7 +9,7 @@ int main() {
     setup_logger();
 
     rt::vec3 a(1, 2, 3);
-    std::cout << a << std::endl;
+    std::cout << -a << std::endl;
 
     return 0;
 }

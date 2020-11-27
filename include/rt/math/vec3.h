@@ -21,10 +21,22 @@ namespace rt {
         friend vec3 operator/(vec3 left, double right);
         friend vec3 operator-(const vec3 &vector);
 
+        vec3& operator+=(const vec3& other);
+        vec3& operator-=(const vec3& other);
+        vec3& operator*=(float other);
+        vec3& operator/=(float other);
+
+        bool operator==(const vec3& other) const;
+        bool operator!=(const vec3& other) const;
+
         double length() const;
         double length_squared() const;
-        vec3 normalize() const;
+        vec3 normalized() const;
         vec3 negate() const;
+
+        double distance(const vec3& other) const;
+        double dot(const vec3& other) const;
+        vec3 cross(const vec3& other) const;
 
         friend std::ostream &operator<<(std::ostream &stream, const vec3 &vector);
     };
