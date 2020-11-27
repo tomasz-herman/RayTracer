@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "ray-tracer-lib/math/vec3.h"
+#include "rt/math/vec3.h"
 
 TEST(vec3, NoArgsConstructor) {
     rt::vec3 vec;

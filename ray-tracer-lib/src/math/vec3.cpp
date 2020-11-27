@@ -1,4 +1,4 @@
-#include <ray-tracer-lib/math/vec3.h>
+#include <rt/math/vec3.h>
 
 namespace rt {
     vec3::vec3() : x(0), y(0), z(0) {}

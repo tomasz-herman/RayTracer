@@ -1,7 +1,7 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <iostream>
-#include <ray-tracer-lib/math/vec3.h>
+#include <rt/math/vec3.h>
 
 void setup_logger();
 

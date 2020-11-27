@@ -22,4 +22,4 @@ macro(package_add_test_with_libraries TESTNAME FILES LIBRARIES)
     set_target_properties(${TESTNAME} PROPERTIES FOLDER tests)
 endmacro()
 
-package_add_test_with_libraries(vec3_test math/vec3_test.cpp ray-tracer-lib)
+package_add_test_with_libraries(vec3_test math/vec3_test.cpp rt)
