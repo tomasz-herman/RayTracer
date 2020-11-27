@@ -6,6 +6,13 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-add_executable(RayTracer src/main.cpp)
+add_subdirectory(ray-tracer-demo)
+add_subdirectory(ray-tracer-lib)
 
-target_link_libraries(RayTracer pthread)
+option(PACKAGE_TESTS "Build the tests" ON)
+
+if(PACKAGE_TESTS)
+    enable_testing()
+    include(GoogleTest)
+    add_subdirectory(ray-tracer-test)
+endif()
