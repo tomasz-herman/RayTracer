@@ -2,6 +2,7 @@
 #include <spdlog/sinks/basic_file_sink.h>
 #include <iostream>
 #include <rt/math/vec3.h>
+#include <rt/math/color3.h>
 
 void setup_logger();
 
@@ -10,6 +11,7 @@ int main() {
 
     rt::vec3 a(1, 2, 3);
     std::cout << -a << std::endl;
+    std::cout << rt::color3::LAVENDER().inverted().brighter().brighter() << std::endl;
 
     return 0;
 }

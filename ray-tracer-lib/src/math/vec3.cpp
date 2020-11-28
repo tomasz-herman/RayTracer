@@ -108,7 +108,7 @@ namespace rt {
     }
 
     std::ostream &operator<<(std::ostream &stream, const vec3 &vector) {
-        stream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ")";
+        stream << "(x:" << vector.x << ", y:" << vector.y << ", z:" << vector.z << ")";
         return stream;
     }
 }

@@ -20,7 +20,6 @@ TEST(vec3, LengthSquaredCorectness) {
 
     double length_squared = vec.length_squared();
 
-
     EXPECT_DOUBLE_EQ(length_squared, 14);
 }
 
@@ -202,5 +201,5 @@ TEST(vec3, OperatorOstreamCorectness) {
     stream << vec;
     std::string str = stream.str();
 
-    EXPECT_STREQ(str.c_str(), "(1, 2, 3)");
+    EXPECT_STREQ(str.c_str(), "(x:1, y:2, z:3)");
 }

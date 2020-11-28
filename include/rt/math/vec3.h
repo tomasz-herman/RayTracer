@@ -29,14 +29,14 @@ namespace rt {
         bool operator==(const vec3& other) const;
         bool operator!=(const vec3& other) const;
 
-        double length() const;
-        double length_squared() const;
-        vec3 normalized() const;
-        vec3 negate() const;
+        [[nodiscard]] double length() const;
+        [[nodiscard]] double length_squared() const;
+        [[nodiscard]] vec3 normalized() const;
+        [[nodiscard]] vec3 negate() const;
 
-        double distance(const vec3& other) const;
-        double dot(const vec3& other) const;
-        vec3 cross(const vec3& other) const;
+        [[nodiscard]] double distance(const vec3& other) const;
+        [[nodiscard]] double dot(const vec3& other) const;
+        [[nodiscard]] vec3 cross(const vec3& other) const;
 
         friend std::ostream &operator<<(std::ostream &stream, const vec3 &vector);
     };
