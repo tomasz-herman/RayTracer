@@ -7,6 +7,7 @@ namespace rt {
     class camera {
     public:
         [[nodiscard]] virtual ray get_ray(double u, double v) const = 0;
+        [[nodiscard]] virtual double get_aspect() const = 0;
     };
 }
 

@@ -9,14 +9,18 @@ set(HEADER_LIST
         ../include/rt/math/utils.h
         ../include/rt/graphics/image.h
         ../include/rt/graphics/camera/camera.h
-        ../include/rt/graphics/camera/perspective_camera.h)
+        ../include/rt/graphics/camera/perspective_camera.h
+        ../include/rt/graphics/scene.h
+        ../include/rt/graphics/renderer.h)
 set(SOURCE_LIST
         src/math/vec3.cpp
         src/math/color3.cpp
         src/math/ray.cpp
         src/objects/sphere.cpp
         src/graphics/image.cpp
-        src/graphics/camera/perspective_camera.cpp)
+        src/graphics/camera/perspective_camera.cpp
+        src/graphics/scene.cpp
+        src/graphics/renderer.cpp)
 
 add_library(rt ${SOURCE_LIST} ${HEADER_LIST})
 

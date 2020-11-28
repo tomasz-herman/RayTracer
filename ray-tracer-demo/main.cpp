@@ -4,22 +4,24 @@
 #include <rt/math/vec3.h>
 #include <rt/math/color3.h>
 #include <rt/graphics/image.h>
+#include <rt/graphics/renderer.h>
+#include <rt/graphics/camera/perspective_camera.h>
+#include <rt/objects/sphere.h>
 
 void setup_logger();
 
 int main() {
     setup_logger();
 
-    rt::vec3 a(1, 2, 3);
-    std::cout << -a << std::endl;
-    std::cout << rt::color3::LAVENDER().inverted().brighter().brighter() << std::endl;
+    rt::renderer renderer(1280, 0, 0);
+    rt::perspective_camera camera(rt::vec3(3, 4, 5), rt::vec3(0, 0, 0), rt::vec3(0, 1, 0), 60, 16.0 / 9.0);
+    rt::scene scene;
 
-    rt::image image(5, 6);
-    image(2, 2) = rt::color3(51, 153, 204);
+    scene.add(std::make_shared<rt::sphere>(rt::vec3(), 1));
 
-    std::cout << image(2, 2) << std::endl;
+    rt::image render = renderer.render(scene, camera);
 
-    image.write("file.png");
+    render.write("image.png");
 
     return 0;
 }
