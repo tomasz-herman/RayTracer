@@ -7,13 +7,16 @@ set(HEADER_LIST
         ../include/rt/objects/hittable.h
         ../include/rt/objects/sphere.h
         ../include/rt/math/utils.h
-        ../include/rt/graphics/image.h)
+        ../include/rt/graphics/image.h
+        ../include/rt/graphics/camera/camera.h
+        ../include/rt/graphics/camera/perspective_camera.h)
 set(SOURCE_LIST
         src/math/vec3.cpp
         src/math/color3.cpp
         src/math/ray.cpp
         src/objects/sphere.cpp
-        src/graphics/image.cpp)
+        src/graphics/image.cpp
+        src/graphics/camera/perspective_camera.cpp)
 
 add_library(rt ${SOURCE_LIST} ${HEADER_LIST})
 
