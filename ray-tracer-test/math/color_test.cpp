@@ -117,7 +117,7 @@ TEST(color, DeriveCanShiftHue) {
     rt::color3 RED(1.0, 0.0, 0.0);
     double hue_shift = 180;
 
-    rt::color3 derived = RED.derive(hue_shift, 1, 1);
+    rt::color3 derived = RED.derive(hue_shift);
 
     EXPECT_DOUBLE_EQ(derived.r, 0.0);
     EXPECT_DOUBLE_EQ(derived.g, 1.0);

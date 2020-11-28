@@ -1,7 +1,19 @@
 set(PROJECT_SOURCE_DIR "${PROJECT_SOURCE_DIR}/src")
 
-set(HEADER_LIST ../include/rt/math/vec3.h ../include/rt/math/color3.h ../include/rt/math/ray.h)
-set(SOURCE_LIST src/math/vec3.cpp src/math/color3.cpp src/math/ray.cpp)
+set(HEADER_LIST
+        ../include/rt/math/vec3.h
+        ../include/rt/math/color3.h
+        ../include/rt/math/ray.h
+        ../include/rt/objects/hittable.h
+        ../include/rt/objects/sphere.h
+        ../include/rt/math/utils.h
+        ../include/rt/graphics/image.h)
+set(SOURCE_LIST
+        src/math/vec3.cpp
+        src/math/color3.cpp
+        src/math/ray.cpp
+        src/objects/sphere.cpp
+        src/graphics/image.cpp)
 
 add_library(rt ${SOURCE_LIST} ${HEADER_LIST})
 

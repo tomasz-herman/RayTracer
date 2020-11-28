@@ -42,7 +42,7 @@ namespace rt {
         static color3 rgb(double r, double g, double b);
         static color3 hsb(double h, double s, double b);
 
-        [[nodiscard]] color3 derive(double hue_shift, double saturation_factor, double brightness_factor) const;
+        [[nodiscard]] color3 derive(double hue_shift, double saturation_factor = 1.0, double brightness_factor = 1.0) const;
 
         [[nodiscard]] color3 darker() const;
         [[nodiscard]] color3 brighter() const;

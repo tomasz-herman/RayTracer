@@ -3,6 +3,7 @@
 #include <iostream>
 #include <rt/math/vec3.h>
 #include <rt/math/color3.h>
+#include <rt/graphics/image.h>
 
 void setup_logger();
 
@@ -12,6 +13,13 @@ int main() {
     rt::vec3 a(1, 2, 3);
     std::cout << -a << std::endl;
     std::cout << rt::color3::LAVENDER().inverted().brighter().brighter() << std::endl;
+
+    rt::image image(5, 6);
+    image(2, 2) = rt::color3(51, 153, 204);
+
+    std::cout << image(2, 2) << std::endl;
+
+    image.write("file.png");
 
     return 0;
 }
