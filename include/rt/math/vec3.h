@@ -18,13 +18,14 @@ namespace rt {
         friend vec3 operator+(vec3 left, const vec3 &right);
         friend vec3 operator-(vec3 left, const vec3 &right);
         friend vec3 operator*(vec3 left, double right);
+        friend vec3 operator*(double left, vec3 right);
         friend vec3 operator/(vec3 left, double right);
         friend vec3 operator-(const vec3 &vector);
 
         vec3& operator+=(const vec3& other);
         vec3& operator-=(const vec3& other);
-        vec3& operator*=(float other);
-        vec3& operator/=(float other);
+        vec3& operator*=(double other);
+        vec3& operator/=(double other);
 
         bool operator==(const vec3& other) const;
         bool operator!=(const vec3& other) const;

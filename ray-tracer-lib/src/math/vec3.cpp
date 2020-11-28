@@ -45,6 +45,10 @@ namespace rt {
         return left.mul(right);
     }
 
+    vec3 operator*(double left, vec3 right) {
+        return right * left;
+    }
+
     vec3 operator/(vec3 left, double right) {
         return left.div(right);
     }
@@ -61,11 +65,11 @@ namespace rt {
         return sub(other);
     }
 
-    vec3 &vec3::operator*=(float other) {
+    vec3 &vec3::operator*=(double other) {
         return mul(other);
     }
 
-    vec3 &vec3::operator/=(float other) {
+    vec3 &vec3::operator/=(double other) {
         return div(other);
     }
 

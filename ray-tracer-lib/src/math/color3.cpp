@@ -1,7 +1,5 @@
 #include <cmath>
-#include <array>
 #include "rt/math/color3.h"
-
 
 namespace rt {
     color3::color3() : r(0), g(0), b(0) {}
@@ -204,7 +202,7 @@ namespace rt {
     }
 
     color3 color3::grayscale() const {
-        double gray = 0.21 * r + 0.71 * g + 0.07 * b;
+        double gray = 0.299 * r + 0.587 * g + 0.114 * b;
         return color3(gray);
     }
 

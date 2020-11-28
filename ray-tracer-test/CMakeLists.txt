@@ -23,3 +23,5 @@ macro(package_add_test_with_libraries TESTNAME FILES LIBRARIES)
 endmacro()
 
 package_add_test_with_libraries(vec3_test math/vec3_test.cpp rt)
+package_add_test_with_libraries(ray_test math/ray_test.cpp rt)
+package_add_test_with_libraries(color_test math/color_test.cpp rt)
