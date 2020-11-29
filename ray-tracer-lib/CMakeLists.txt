@@ -1,17 +1,17 @@
 set(PROJECT_SOURCE_DIR "${PROJECT_SOURCE_DIR}/src")
 
 set(HEADER_LIST
-        ../include/rt/math/vec3.h
-        ../include/rt/math/color3.h
-        ../include/rt/math/ray.h
-        ../include/rt/objects/hittable.h
-        ../include/rt/objects/sphere.h
-        ../include/rt/math/utils.h
-        ../include/rt/graphics/image.h
-        ../include/rt/graphics/camera/camera.h
-        ../include/rt/graphics/camera/perspective_camera.h
-        ../include/rt/graphics/scene.h
-        ../include/rt/graphics/renderer.h)
+        include/rt/math/vec3.h
+        include/rt/math/color3.h
+        include/rt/math/ray.h
+        include/rt/objects/hittable.h
+        include/rt/objects/sphere.h
+        include/rt/math/utils.h
+        include/rt/graphics/image.h
+        include/rt/graphics/camera/camera.h
+        include/rt/graphics/camera/perspective_camera.h
+        include/rt/graphics/scene.h
+        include/rt/graphics/renderer.h)
 set(SOURCE_LIST
         src/math/vec3.cpp
         src/math/color3.cpp
@@ -24,10 +24,10 @@ set(SOURCE_LIST
 
 add_library(rt ${SOURCE_LIST} ${HEADER_LIST})
 
-target_include_directories(rt PUBLIC ../include ../extern/stb)
+target_include_directories(rt PUBLIC include ../extern/stb)
 target_link_libraries(rt PUBLIC spdlog::spdlog)
 
 source_group(
-        TREE "${RayTracer_SOURCE_DIR}/include"
+        TREE "${RayTracer_SOURCE_DIR}/ray-tracer-lib/include"
         PREFIX "Header Files"
         FILES ${HEADER_LIST})
