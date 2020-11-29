@@ -24,7 +24,8 @@ set(SOURCE_LIST
 
 add_library(rt ${SOURCE_LIST} ${HEADER_LIST})
 
-target_include_directories(rt PUBLIC "${RayTracer_SOURCE_DIR}/include")
+target_include_directories(rt PUBLIC ../include ../extern/stb)
+target_link_libraries(rt PUBLIC spdlog::spdlog)
 
 source_group(
         TREE "${RayTracer_SOURCE_DIR}/include"

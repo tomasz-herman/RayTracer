@@ -1,8 +1,6 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/basic_file_sink.h>
-#include <iostream>
 #include <rt/math/vec3.h>
-#include <rt/math/color3.h>
 #include <rt/graphics/image.h>
 #include <rt/graphics/renderer.h>
 #include <rt/graphics/camera/perspective_camera.h>

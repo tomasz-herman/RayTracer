@@ -7,6 +7,8 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 add_subdirectory(ray-tracer-demo)
 add_subdirectory(ray-tracer-lib)
 
+add_subdirectory(extern/spdlog)
+
 option(PACKAGE_TESTS "Build the tests" ON)
 
 if(PACKAGE_TESTS)
