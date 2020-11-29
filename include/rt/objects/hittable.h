@@ -12,7 +12,7 @@ namespace rt {
 
     class hittable {
     public:
-        [[nodiscard]] virtual bool hit(const ray& r, hit& hit, double from, double to) const = 0;
+        [[nodiscard]] virtual bool hit_test(const ray& ray, hit& hit, double from, double to) const = 0;
     };
 }
 

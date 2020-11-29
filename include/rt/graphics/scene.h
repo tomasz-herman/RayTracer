@@ -10,7 +10,7 @@ namespace rt {
     public:
         void clear();
         void add(const std::shared_ptr<hittable>& obj);
-        bool hit(const ray &r, struct hit &hit, double from, double to) const override;
+        bool hit_test(const ray &r, hit &hit, double from, double to) const override;
     private:
         std::vector<std::shared_ptr<hittable>> objects;
     };

@@ -10,7 +10,7 @@ namespace rt {
     public:
         renderer(int resolution, int samples, int max_depth);
 
-        image render(const scene& scene, const camera& camera) const;
+        [[nodiscard]] image render(const scene& scene, const camera& camera) const;
     private:
         int resolution;
         int samples;

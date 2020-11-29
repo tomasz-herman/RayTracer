@@ -5,10 +5,10 @@ namespace rt {
     sphere::sphere(vec3 position, double radius) : position(position), radius(radius) { }
     sphere::sphere(double x, double y, double z, double radius) : position(vec3(x, y, z)), radius(radius) {}
 
-    bool sphere::hit(const ray& r, struct hit& hit, double from, double to) const {
-        vec3 oc = r.origin - position;
-        double a = r.direction.length_squared();
-        double half_b = oc.dot(r.direction);
+    bool sphere::hit_test(const ray& ray, hit& hit, double from, double to) const {
+        vec3 oc = ray.origin - position;
+        double a = ray.direction.length_squared();
+        double half_b = oc.dot(ray.direction);
         double c = oc.length_squared() - radius*radius;
 
         double discriminant = half_b*half_b - a*c;
@@ -23,7 +23,7 @@ namespace rt {
         }
 
         hit.distance = root;
-        hit.position = r(hit.distance);
+        hit.position = ray(hit.distance);
         hit.normal = (hit.position - position) / radius;
 
         return true;

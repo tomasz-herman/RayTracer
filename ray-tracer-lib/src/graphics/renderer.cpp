@@ -12,9 +12,9 @@ namespace rt {
             for(int j = 0; j < height; j++) {
                 double u = (double) i / (width - 1);
                 double v = (double) j / (height - 1);
-                ray r = camera.get_ray(u, v);
-                struct hit h;
-                if(scene.hit(r, h, 0.0001, INF)) {
+                ray ray = camera.get_ray(u, v);
+                hit hit;
+                if(scene.hit_test(ray, hit, 0.0001, INF)) {
                     render(i, j) = color3::CADETBLUE();
                 }
             }
