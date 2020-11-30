@@ -1,7 +1,8 @@
+#include <chrono>
+#include <spdlog/spdlog.h>
+#include <spdlog/stopwatch.h>
 #include "rt/graphics/image.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
@@ -32,6 +33,8 @@ namespace rt {
     }
 
     void image::write(const std::string& path) const {
+        spdlog::debug("Writing image to a file \"{}\".", path);
+        spdlog::stopwatch sw;
         auto data_ptr = std::make_unique<uint8_t[]>(width * height * 3);
         for(int i = 0; i < height; i++)
             for(int j = 0; j < width; j++) {
@@ -41,7 +44,11 @@ namespace rt {
                 data_ptr[i * width * 3 + j * 3 + 2] = color.b * 255;
             }
         int result = stbi_write_png(path.c_str(), width, height, 3, data_ptr.get(), width * 3);
-        if(!result) throw std::exception();
+        if(!result) {
+            spdlog::error("Writing image to a file \"{}\" failed, stb image returned with error code: {}.", path, result);
+            throw std::exception();
+        }
+        spdlog::debug("Writing image to a file \"{}\" succeeded in {:.3}s.", path, sw);
     }
 }
 

@@ -1,4 +1,6 @@
 #include <rt/math/utils.h>
+#include <spdlog/spdlog.h>
+#include <spdlog/stopwatch.h>
 #include "rt/graphics/renderer.h"
 
 namespace rt {
@@ -8,6 +10,8 @@ namespace rt {
         int width = resolution;
         int height = static_cast<int>(resolution / camera.get_aspect());
         image render(width, height);
+        spdlog::debug("Rendering scene to image. Using {} samples. Max depth is {}. Resolution is {}x{}.", samples, max_depth, width, height);
+        spdlog::stopwatch sw;
         for(int i = 0; i < width; i++) {
             for(int j = 0; j < height; j++) {
                 double u = (double) i / (width - 1);
@@ -19,6 +23,7 @@ namespace rt {
                 }
             }
         }
+        spdlog::debug("Render finished in {:.3}s.", sw);
         return render;
     }
 
