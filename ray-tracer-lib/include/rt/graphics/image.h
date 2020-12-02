@@ -20,6 +20,8 @@ namespace rt {
         [[nodiscard]] int get_width() const;
         [[nodiscard]] int get_height() const;
 
+        void process(const std::function<color3 (color3)>& function);
+
         void write(const std::string& path) const;
     };
 }

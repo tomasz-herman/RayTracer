@@ -217,6 +217,14 @@ namespace rt {
                 b + (other.b - b) * factor);
     }
 
+    color3 color3::gamma_correction(double gamma) const {
+        double exp = 1.0 / gamma;
+        return color3(
+                pow(r, exp),
+                pow(g, exp),
+                pow(b, exp));
+    }
+
     color3 color3::ALICEBLUE() {
         return color3(0.9411765f, 0.972549f, 1.0f);
     }

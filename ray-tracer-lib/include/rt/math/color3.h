@@ -50,6 +50,7 @@ namespace rt {
         [[nodiscard]] color3 desaturated() const;
         [[nodiscard]] color3 grayscale() const;
         [[nodiscard]] color3 inverted() const;
+        [[nodiscard]] color3 gamma_correction(double gamma) const;
 
         [[nodiscard]] color3 interpolated(const color3& other, double factor) const;
 

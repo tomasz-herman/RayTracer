@@ -32,6 +32,12 @@ namespace rt {
         return height;
     }
 
+    void image::process(const std::function<color3(color3)> &function) {
+        for(int i = 0; i < height; i++)
+            for(int j = 0; j < width; j++)
+                data[i][j] = function(data[i][j]);
+    }
+
     void image::write(const std::string& path) const {
         spdlog::debug("Writing image to a file \"{}\".", path);
         spdlog::stopwatch sw;
