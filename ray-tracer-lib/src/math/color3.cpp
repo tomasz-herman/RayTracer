@@ -28,6 +28,13 @@ namespace rt {
         return *this;
     }
 
+    color3 &color3::mul(const color3& other) {
+        r *= other.r;
+        g *= other.g;
+        b *= other.b;
+        return *this;
+    }
+
     color3 &color3::div(double other) {
         r /= other;
         g /= other;
@@ -41,6 +48,10 @@ namespace rt {
 
     color3 operator-(color3 left, const color3 &right) {
         return left.sub(right);
+    }
+
+    color3 operator*(color3 left, const color3 &right) {
+        return left.mul(right);
     }
 
     color3 operator*(color3 left, double right) {
@@ -59,11 +70,11 @@ namespace rt {
         return sub(other);
     }
 
-    color3 &color3::operator*=(float other) {
+    color3 &color3::operator*=(double other) {
         return mul(other);
     }
 
-    color3 &color3::operator/=(float other) {
+    color3 &color3::operator/=(double other) {
         return div(other);
     }
 

@@ -17,14 +17,28 @@ namespace rt {
                 double u = (double) i / (width - 1);
                 double v = (double) j / (height - 1);
                 ray ray = camera.get_ray(u, v);
-                hit hit;
-                if(scene.hit_test(ray, hit, 0.0001, INF)) {
-                    render(i, j) = color3::CADETBLUE();
-                }
+                render(i, j) = shade(ray, scene, max_depth);
             }
         }
         spdlog::debug("Render finished in {:.3}s.", sw);
         return render;
+    }
+
+    color3 renderer::shade(const ray &r, const scene &scene, int depth) const {
+        if(depth == 0) return color3::BLACK();
+
+        hit hit;
+
+        if(scene.hit_test(r, hit, 0.001, INF)) {
+            ray scattered((vec3()), vec3());
+            color3 attenuation;
+            if(hit.material_ptr->scatter(r, hit, attenuation, scattered)) {
+                return attenuation * shade(scattered, scene, depth - 1);
+            }
+            return color3::BLACK();
+        }
+//        return color3::SKYBLUE() * (0.5 + (r.direction.y + 1) * 0.25);
+        return color3::SKYBLUE() * ((r.direction.y + 1) * 0.5);
     }
 
 }

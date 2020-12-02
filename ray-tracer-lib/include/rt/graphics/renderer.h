@@ -11,6 +11,7 @@ namespace rt {
         renderer(int resolution, int samples, int max_depth);
 
         [[nodiscard]] image render(const scene& scene, const camera& camera) const;
+        [[nodiscard]] color3 shade(const ray& ray, const scene& scene, int depth) const;
     private:
         int resolution;
         int samples;

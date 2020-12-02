@@ -11,7 +11,9 @@ set(HEADER_LIST
         include/rt/graphics/camera/camera.h
         include/rt/graphics/camera/perspective_camera.h
         include/rt/graphics/scene.h
-        include/rt/graphics/renderer.h)
+        include/rt/graphics/renderer.h
+        include/rt/materials/material.h
+        include/rt/materials/diffuse.h)
 set(SOURCE_LIST
         src/math/vec3.cpp
         src/math/color3.cpp
@@ -20,7 +22,8 @@ set(SOURCE_LIST
         src/graphics/image.cpp
         src/graphics/camera/perspective_camera.cpp
         src/graphics/scene.cpp
-        src/graphics/renderer.cpp)
+        src/graphics/renderer.cpp
+        src/materials/diffuse.cpp)
 
 add_library(rt ${SOURCE_LIST} ${HEADER_LIST})
 

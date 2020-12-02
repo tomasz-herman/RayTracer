@@ -5,17 +5,18 @@
 #include <rt/graphics/renderer.h>
 #include <rt/graphics/camera/perspective_camera.h>
 #include <rt/objects/sphere.h>
+#include <rt/materials/diffuse.h>
 
 void setup_logger();
 
 int main() {
     setup_logger();
 
-    rt::renderer renderer(1280, 0, 0);
-    rt::perspective_camera camera(rt::vec3(3, 4, 5), rt::vec3(0, 0, 0), rt::vec3(0, 1, 0), 60, 16.0 / 9.0);
+    rt::renderer renderer(1280, 0, 10);
+    rt::perspective_camera camera(rt::vec3(0, 0, 5), rt::vec3(0, 0, 0), rt::vec3(0, 1, 0), 60, 16.0 / 9.0);
     rt::scene scene;
 
-    scene.add(std::make_shared<rt::sphere>(rt::vec3(), 1));
+    scene.add(std::make_shared<rt::sphere>(std::make_shared<rt::diffuse>(rt::color3::ORANGE()), rt::vec3(0, 0, 0), 1));
 
     rt::image render = renderer.render(scene, camera);
 

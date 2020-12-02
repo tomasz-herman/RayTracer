@@ -18,18 +18,21 @@ namespace rt {
 
         color3& add(const color3& other);
         color3& sub(const color3& other);
+        color3& mul(const color3 &other);
         color3& mul(double other);
         color3& div(double other);
 
         friend color3 operator+(color3 left, const color3 &right);
         friend color3 operator-(color3 left, const color3 &right);
+        friend color3 operator*(color3 left, const color3 &right);
         friend color3 operator*(color3 left, double right);
         friend color3 operator/(color3 left, double right);
 
         color3& operator+=(const color3& other);
         color3& operator-=(const color3& other);
-        color3& operator*=(float other);
-        color3& operator/=(float other);
+        color3& operator*=(const color3& other);
+        color3& operator*=(double other);
+        color3& operator/=(double other);
 
         bool operator==(const color3& other) const;
         bool operator!=(const color3& other) const;

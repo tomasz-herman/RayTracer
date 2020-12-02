@@ -44,7 +44,7 @@ namespace rt {
         auto data_ptr = std::make_unique<uint8_t[]>(width * height * 3);
         for(int i = 0; i < height; i++)
             for(int j = 0; j < width; j++) {
-                color3 color = data[i][j];
+                color3 color = data[height - i - 1][j];
                 data_ptr[i * width * 3 + j * 3 + 0] = color.r * 255;
                 data_ptr[i * width * 3 + j * 3 + 1] = color.g * 255;
                 data_ptr[i * width * 3 + j * 3 + 2] = color.b * 255;

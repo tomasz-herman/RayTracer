@@ -1,12 +1,17 @@
 #ifndef RAYTRACER_HITTABLE_H
 #define RAYTRACER_HITTABLE_H
 
+#include <memory>
+#include <rt/materials/material.h>
 #include "rt/math/ray.h"
 
 namespace rt {
+    class material;
+
     struct hit {
         vec3 position;
         vec3 normal;
+        std::shared_ptr<material> material_ptr;
         double distance = 0;
     };
 
