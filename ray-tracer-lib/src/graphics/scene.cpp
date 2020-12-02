@@ -1,6 +1,8 @@
 #include "rt/graphics/scene.h"
 
 namespace rt {
+    scene::scene(const color3 &sky_color) : sky_color(sky_color) { }
+
     void scene::clear() {
         objects.clear();
     }
@@ -23,6 +25,14 @@ namespace rt {
         }
 
         return hit_anything;
+    }
+
+    const color3& scene::get_sky_color() const {
+        return sky_color;
+    }
+
+    void scene::set_sky_color(const color3 &skyColor) {
+        sky_color = skyColor;
     }
 }
 

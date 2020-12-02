@@ -40,7 +40,7 @@ namespace rt {
             }
             return color3::BLACK();
         }
-        return color3::SKYBLUE() * (0.5 + (r.direction.y + 1) * 0.25);
+        return scene.get_sky_color() * (0.5 + (r.direction.y + 1) * 0.25);
     }
 
 }
