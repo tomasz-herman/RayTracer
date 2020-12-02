@@ -13,7 +13,7 @@ void setup_logger();
 int main() {
     setup_logger();
 
-    rt::renderer renderer(1280, 0, 10);
+    rt::renderer renderer(1280, 64, 10);
     rt::perspective_camera camera(rt::vec3(0, 0, 5), rt::vec3(0, 0, 0), rt::vec3(0, 1, 0), 60, 16.0 / 9.0);
     rt::scene scene;
 

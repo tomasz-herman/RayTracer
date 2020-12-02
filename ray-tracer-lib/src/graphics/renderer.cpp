@@ -17,9 +17,12 @@ namespace rt {
                 double u = (double) i / (width - 1);
                 double v = (double) j / (height - 1);
                 ray ray = camera.get_ray(u, v);
-                render(i, j) = shade(ray, scene, max_depth);
+                for (int k = 0; k < samples; ++k) {
+                    render(i, j) += shade(ray, scene, max_depth);
+                }
             }
         }
+        render.process([&](color3 c) { return c / samples; });
         spdlog::debug("Render finished in {:.3}s.", sw);
         return render;
     }
