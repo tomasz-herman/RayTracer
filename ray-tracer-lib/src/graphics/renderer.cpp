@@ -37,8 +37,7 @@ namespace rt {
             }
             return color3::BLACK();
         }
-//        return color3::SKYBLUE() * (0.5 + (r.direction.y + 1) * 0.25);
-        return color3::SKYBLUE() * ((r.direction.y + 1) * 0.5);
+        return color3::SKYBLUE() * (0.5 + (r.direction.y + 1) * 0.25);
     }
 
 }

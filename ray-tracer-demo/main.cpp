@@ -6,6 +6,7 @@
 #include <rt/graphics/camera/perspective_camera.h>
 #include <rt/objects/sphere.h>
 #include <rt/materials/diffuse.h>
+#include <rt/objects/plane.h>
 
 void setup_logger();
 
@@ -17,6 +18,7 @@ int main() {
     rt::scene scene;
 
     scene.add(std::make_shared<rt::sphere>(std::make_shared<rt::diffuse>(rt::color3::ORANGE()), rt::vec3(0, 0, 0), 1));
+    scene.add(std::make_shared<rt::plane>(std::make_shared<rt::diffuse>(rt::color3::LAWNGREEN()), rt::vec3(0, -1, 0)));
 
     rt::image render = renderer.render(scene, camera);
 
