@@ -24,6 +24,7 @@ namespace rt {
         static std::unique_ptr<Vec2[]> regular(int count);
         static std::unique_ptr<Vec2[]> jitter(int count);
         static Vec2 wide_range(Vec2 sample);
+        static Vec2 to_disk(Vec2 sample);
     };
 }
 
