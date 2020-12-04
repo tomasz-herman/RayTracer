@@ -1,17 +1,17 @@
-#include "rt/graphics/scene.h"
+#include "rt/graphics/Scene.h"
 
 namespace rt {
-    scene::scene(const color3 &sky_color) : sky_color(sky_color) { }
+    Scene::Scene(const Color3 &sky_color) : sky_color(sky_color) { }
 
-    void scene::clear() {
+    void Scene::clear() {
         objects.clear();
     }
 
-    void scene::add(const std::shared_ptr<hittable>& obj) {
+    void Scene::add(const std::shared_ptr<Hittable>& obj) {
         objects.push_back(obj);
     }
 
-    bool scene::hit_test(const ray &ray, hit &hit, double from, double to) const {
+    bool Scene::hit_test(const Ray &ray, hit &hit, double from, double to) const {
         struct hit temp_hit;
         bool hit_anything = false;
         double closest = to;
@@ -27,11 +27,11 @@ namespace rt {
         return hit_anything;
     }
 
-    const color3& scene::get_sky_color() const {
+    const Color3& Scene::get_sky_color() const {
         return sky_color;
     }
 
-    void scene::set_sky_color(const color3 &skyColor) {
+    void Scene::set_sky_color(const Color3 &skyColor) {
         sky_color = skyColor;
     }
 }

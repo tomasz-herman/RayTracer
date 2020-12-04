@@ -2,25 +2,25 @@
 #define RAYTRACER_IMAGE_H
 
 #include <memory>
-#include <rt/math/color3.h>
+#include <rt/math/Color3.h>
 #include <vector>
 #include <ostream>
 
 namespace rt {
-    class image {
+    class Image {
         int width, height;
-        std::vector<std::vector<color3>> data;
+        std::vector<std::vector<Color3>> data;
 
     public:
-        image(int width, int height);
-        image(const image& img);
+        Image(int width, int height);
+        Image(const Image& img);
 
-        color3& operator()(int w, int h);
+        Color3& operator()(int w, int h);
 
         [[nodiscard]] int get_width() const;
         [[nodiscard]] int get_height() const;
 
-        void process(const std::function<color3 (color3)>& function);
+        void process(const std::function<Color3 (Color3)>& function);
 
         void write(const std::string& path) const;
     };

@@ -1,31 +1,33 @@
 set(PROJECT_SOURCE_DIR "${PROJECT_SOURCE_DIR}/src")
 
 set(HEADER_LIST
-        include/rt/math/vec3.h
-        include/rt/math/color3.h
-        include/rt/math/ray.h
-        include/rt/objects/hittable.h
-        include/rt/objects/sphere.h
-        include/rt/math/utils.h
-        include/rt/graphics/image.h
-        include/rt/graphics/camera/camera.h
-        include/rt/graphics/camera/perspective_camera.h
-        include/rt/graphics/scene.h
-        include/rt/graphics/renderer.h
-        include/rt/materials/material.h
-        include/rt/materials/diffuse.h
-        include/rt/objects/plane.h)
+        include/rt/math/Vec3.h
+        include/rt/math/Color3.h
+        include/rt/math/Ray.h
+        include/rt/objects/Hittable.h
+        include/rt/objects/Sphere.h
+        include/rt/math/Utils.h
+        include/rt/graphics/Image.h
+        include/rt/graphics/camera/Camera.h
+        include/rt/graphics/camera/PerspectiveCamera.h
+        include/rt/graphics/Scene.h
+        include/rt/graphics/Renderer.h
+        include/rt/materials/Material.h
+        include/rt/materials/Diffuse.h
+        include/rt/objects/Plane.h
+        include/rt/math/Vec2.h)
 set(SOURCE_LIST
-        src/math/vec3.cpp
-        src/math/color3.cpp
-        src/math/ray.cpp
-        src/objects/sphere.cpp
-        src/graphics/image.cpp
-        src/graphics/camera/perspective_camera.cpp
-        src/graphics/scene.cpp
-        src/graphics/renderer.cpp
-        src/materials/diffuse.cpp
-        src/objects/plane.cpp)
+        src/math/Vec3.cpp
+        src/math/Color3.cpp
+        src/math/Ray.cpp
+        src/objects/Sphere.cpp
+        src/graphics/Image.cpp
+        src/graphics/camera/PerspectiveCamera.cpp
+        src/graphics/Scene.cpp
+        src/graphics/Renderer.cpp
+        src/materials/Diffuse.cpp
+        src/objects/Plane.cpp
+        src/math/Vec2.cpp)
 
 add_library(rt ${SOURCE_LIST} ${HEADER_LIST})
 

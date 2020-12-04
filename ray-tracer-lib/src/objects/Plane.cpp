@@ -1,9 +1,9 @@
-#include "rt/objects/plane.h"
+#include "rt/objects/Plane.h"
 
 namespace rt {
-    plane::plane(std::shared_ptr<material> material_ptr, vec3 position, vec3 normal) : material_ptr(std::move(material_ptr)), position(position), normal(normal) { }
+    Plane::Plane(std::shared_ptr<Material> material_ptr, Vec3 position, Vec3 normal) : material_ptr(std::move(material_ptr)), position(position), normal(normal) { }
 
-    bool plane::hit_test(const ray &ray, hit &hit, double from, double to) const {
+    bool Plane::hit_test(const Ray &ray, hit &hit, double from, double to) const {
         double t = (position - ray.origin).dot(normal) / ray.direction.dot(normal);
 
         if (t < from || to < t) {

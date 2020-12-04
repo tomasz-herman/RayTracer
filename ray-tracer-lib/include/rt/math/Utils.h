@@ -3,7 +3,7 @@
 
 #include <limits>
 #include <random>
-#include "vec3.h"
+#include "Vec3.h"
 
 namespace rt {
     static constexpr double INF = std::numeric_limits<double>::infinity();
@@ -29,11 +29,11 @@ namespace rt {
         return distribution(generator);
     }
 
-    inline static vec3 random_vec3(double min, double max) {
-        return vec3(random_double(min,max), random_double(min,max), random_double(min,max));
+    inline static Vec3 random_vec3(double min, double max) {
+        return Vec3(random_double(min, max), random_double(min, max), random_double(min, max));
     }
 
-    inline static vec3 random_vec3_in_unit_sphere() {
+    inline static Vec3 random_vec3_in_unit_sphere() {
         while (true) {
             auto p = random_vec3(-1,1);
             if (p.length_squared() >= 1) continue;
