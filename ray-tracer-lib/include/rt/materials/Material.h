@@ -9,7 +9,7 @@ namespace rt {
     class hit;
     class Material {
     public:
-        virtual bool scatter(const Ray& in, const hit& hit, Color3& attenuation, Ray& out) const = 0;
+        virtual bool scatter(const Ray& in, const hit& hit, Color3& attenuation, Ray& out) = 0;
     };
 }
 

@@ -19,13 +19,13 @@ namespace rt {
 
     inline double random_double() {
         static std::uniform_real_distribution<double> distribution(0.0, 1.0);
-        static std::mt19937 generator;
+        static std::mt19937 generator(std::random_device{}());
         return distribution(generator);
     }
 
     inline double random_double(double from, double to) {
         static std::uniform_real_distribution<double> distribution(from, to);
-        static std::mt19937 generator;
+        static std::mt19937 generator(std::random_device{}());
         return distribution(generator);
     }
 
@@ -39,6 +39,11 @@ namespace rt {
             if (p.length_squared() >= 1) continue;
             return p;
         }
+    }
+
+    inline std::mt19937& random_generator() {
+        static thread_local std::mt19937 gen(std::random_device{}());
+        return gen;
     }
 }
 

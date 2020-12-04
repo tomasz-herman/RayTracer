@@ -15,7 +15,9 @@ set(HEADER_LIST
         include/rt/materials/Material.h
         include/rt/materials/Diffuse.h
         include/rt/objects/Plane.h
-        include/rt/math/Vec2.h)
+        include/rt/math/Vec2.h
+        include/rt/sampling/Sampler2.h
+        include/rt/sampling/Sampler3.h)
 set(SOURCE_LIST
         src/math/Vec3.cpp
         src/math/Color3.cpp
@@ -27,7 +29,9 @@ set(SOURCE_LIST
         src/graphics/Renderer.cpp
         src/materials/Diffuse.cpp
         src/objects/Plane.cpp
-        src/math/Vec2.cpp)
+        src/math/Vec2.cpp
+        src/sampling/Sampler2.cpp
+        src/sampling/Sampler3.cpp)
 
 add_library(rt ${SOURCE_LIST} ${HEADER_LIST})
 
