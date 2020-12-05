@@ -22,8 +22,6 @@ int main() {
 
     rt::Image render = renderer.render(scene, camera);
 
-    render.process([](rt::Color3 c) { return c.gamma_correction(2.2); });
-
     render.write("image.png");
 
     return 0;

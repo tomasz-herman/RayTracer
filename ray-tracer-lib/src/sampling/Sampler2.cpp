@@ -15,7 +15,7 @@ namespace rt {
     }
 
     Vec2 Sampler2::get_sample() {
-        if(current > count) {
+        if(current >= count) {
             current = 0;
             if(sets > 1) set = distribution(rand);
         }

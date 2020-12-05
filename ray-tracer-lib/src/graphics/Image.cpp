@@ -8,9 +8,9 @@
 
 namespace rt {
     Image::Image(int width, int height) : width(width), height(height) {
-        data = std::vector<std::vector<Color3>>(height);
-        for (auto &line : data) {
-            line = std::vector<Color3>(width);
+        data = std::make_unique<std::unique_ptr<Color3[]>[]>(height);
+        for (int i = 0; i < height; ++i) {
+            data[i] = std::make_unique<Color3[]>(width);
         }
     }
 

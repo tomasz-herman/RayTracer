@@ -8,9 +8,6 @@
 
 namespace rt {
     class Image {
-        int width, height;
-        std::vector<std::vector<Color3>> data;
-
     public:
         Image(int width, int height);
         Image(const Image& img);
@@ -23,6 +20,9 @@ namespace rt {
         void process(const std::function<Color3 (Color3)>& function);
 
         void write(const std::string& path) const;
+    private:
+        int width, height;
+        std::unique_ptr<std::unique_ptr<Color3[]>[]> data;
     };
 }
 

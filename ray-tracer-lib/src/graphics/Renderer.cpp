@@ -43,7 +43,7 @@ namespace rt {
             }
             return Color3::BLACK();
         }
-        return scene.get_sky_color() * (0.5 + (r.direction.y + 1) * 0.25);
+        return scene.get_sky_color();
     }
 
 }

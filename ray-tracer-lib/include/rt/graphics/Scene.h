@@ -8,7 +8,7 @@
 namespace rt {
     class Scene : Hittable {
     public:
-        explicit Scene(const Color3& sky_color = Color3::SKYBLUE());
+        explicit Scene(const Color3& sky_color = Color3::LIGHTSKYBLUE());
         void clear();
         void add(const std::shared_ptr<Hittable>& obj);
         bool hit_test(const Ray &r, hit &hit, double from, double to) const override;
