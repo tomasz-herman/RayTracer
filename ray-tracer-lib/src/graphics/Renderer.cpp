@@ -12,7 +12,7 @@ namespace rt {
         int width = resolution;
         int height = static_cast<int>(resolution / camera.get_aspect());
         Image render(width, height);
-        spdlog::debug("Rendering scene to image. Using {} samples. Max depth is {}. Resolution is {}x{}.", samples, max_depth, width, height);
+        spdlog::info("Rendering scene to image. Using {} samples. Max depth is {}. Resolution is {}x{}.", samples, max_depth, width, height);
         spdlog::stopwatch sw;
         for(int i = 0; i < width; i++) {
             for(int j = 0; j < height; j++) {
@@ -26,7 +26,7 @@ namespace rt {
             }
         }
         render.process([&](Color3 c) { return c / samples; });
-        spdlog::debug("Render finished in {:.3}s.", sw);
+        spdlog::info("Render finished in {:.3}s.", sw);
         return render;
     }
 

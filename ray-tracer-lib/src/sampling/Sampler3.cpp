@@ -3,9 +3,9 @@
 #include "rt/sampling/Sampler3.h"
 
 namespace rt {
-    Sampler3::Sampler3(const std::function<std::unique_ptr<Vec3[]>(int)> &generator, int count, int sets, const std::function<Vec3(Vec3)> &mapping) : count(count), current(0), sets(sets), set(0) {
+    Sampler3::Sampler3(const std::function<std::valarray<Vec3>(int)> &generator, int count, int sets, const std::function<Vec3(Vec3)> &mapping) : count(count), current(0), sets(sets), set(0) {
         distribution = std::uniform_int_distribution<int>(0, sets - 1);
-        samples = std::make_unique<std::unique_ptr<Vec3[]>[]>(sets);
+        samples = std::valarray<std::valarray<Vec3>>(sets);
         for (int i = 0; i < sets; ++i) {
             samples[i] = generator(count);
             for (int j = 0; j < count; ++j) {
@@ -30,18 +30,18 @@ namespace rt {
         return count;
     }
 
-    std::unique_ptr<Vec3[]> Sampler3::dummy(int count) {
-        std::unique_ptr<Vec3[]> samples = std::make_unique<Vec3[]>(count);
+    std::valarray<Vec3> Sampler3::dummy(int count) {
+        std::valarray<Vec3> samples = std::valarray<Vec3>(count);
         for (int i = 0; i < count; ++i) {
             samples[i].x = samples[i].y = samples[i].z = 0.5;
         }
         return samples;
     }
 
-    std::unique_ptr<Vec3[]> Sampler3::random(int count) {
+    std::valarray<Vec3> Sampler3::random(int count) {
         std::uniform_real_distribution<double> distribution(0.0, 1.0);
         std::mt19937 generator(std::random_device{}());
-        std::unique_ptr<Vec3[]> samples = std::make_unique<Vec3[]>(count);
+        std::valarray<Vec3> samples = std::valarray<Vec3>(count);
         for (int i = 0; i < count; ++i) {
             samples[i].x = distribution(generator);
             samples[i].y = distribution(generator);
@@ -50,9 +50,9 @@ namespace rt {
         return samples;
     }
 
-    std::unique_ptr<Vec3[]> Sampler3::regular(int count) {
+    std::valarray<Vec3> Sampler3::regular(int count) {
         int size = ceil(cbrt(count));
-        std::unique_ptr<Vec3[]> samples = std::make_unique<Vec3[]>(size * size * size);
+        std::valarray<Vec3> samples = std::valarray<Vec3>(size * size * size);
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
                 for (int k = 0; k < size; ++k) {
@@ -65,11 +65,11 @@ namespace rt {
         return samples;
     }
 
-    std::unique_ptr<Vec3[]> Sampler3::jitter(int count) {
+    std::valarray<Vec3> Sampler3::jitter(int count) {
         std::uniform_real_distribution<double> distribution(0.0, 1.0);
         std::mt19937 generator(std::random_device{}());
         int size = ceil(cbrt(count));
-        std::unique_ptr<Vec3[]> samples = std::make_unique<Vec3[]>(size * size * size);
+        std::valarray<Vec3> samples = std::valarray<Vec3>(size * size * size);
         for (int i = 0; i < size; ++i) {
             for (int j = 0; j < size; ++j) {
                 for (int k = 0; k < size; ++k) {
@@ -82,10 +82,10 @@ namespace rt {
         return samples;
     }
 
-    std::unique_ptr<Vec3[]> Sampler3::uniform_sphere(int count) {
+    std::valarray<Vec3> Sampler3::uniform_sphere(int count) {
         std::normal_distribution<double> distribution(0.0, 1.0);
         std::mt19937 generator(std::random_device{}());
-        std::unique_ptr<Vec3[]> samples = std::make_unique<Vec3[]>(count);
+        std::valarray<Vec3> samples = std::valarray<Vec3>(count);
         for (int i = 0; i < count; ++i) {
             double x = distribution(generator);
             double y = distribution(generator);

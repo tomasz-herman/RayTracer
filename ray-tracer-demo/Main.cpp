@@ -18,7 +18,7 @@ int main() {
     rt::Scene scene;
 
     scene.add(std::make_shared<rt::Sphere>(std::make_shared<rt::Diffuse>(rt::Color3::ORANGE()), rt::Vec3(0, 0, 0), 1));
-    scene.add(std::make_shared<rt::Plane>(std::make_shared<rt::Diffuse>(rt::Color3::LAWNGREEN()), rt::Vec3(0, -1, 0)));
+    scene.add(std::make_shared<rt::Plane>(std::make_shared<rt::Diffuse>(rt::Color3::FORESTGREEN()), rt::Vec3(0, -1, 0)));
 
     rt::Image render = renderer.render(scene, camera);
 

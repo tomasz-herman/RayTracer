@@ -34,7 +34,7 @@ TEST(color, RGBIntegersConstructor) {
 }
 
 TEST(color, FromHsb) {
-    rt::Color3 color = rt::Color3::Color3(60, 0.5, 0.6); //olive
+    rt::Color3 color = rt::Color3::hsb(60, 0.5, 0.6); //olive
 
     EXPECT_DOUBLE_EQ(color.r, 0.6);
     EXPECT_DOUBLE_EQ(color.g, 0.6);
