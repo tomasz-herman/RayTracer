@@ -7,6 +7,7 @@
 #include <rt/objects/Sphere.h>
 #include <rt/materials/Diffuse.h>
 #include <rt/objects/Plane.h>
+#include <rt/materials/Reflective.h>
 
 void setup_logger();
 
@@ -14,10 +15,12 @@ int main() {
     setup_logger();
 
     rt::Renderer renderer(1280, 64, 10);
-    rt::PerspectiveCamera camera(rt::Vec3(0, 0, 5), rt::Vec3(0, 0, 0), rt::Vec3(0, 1, 0), 60, 16.0 / 9.0);
+    rt::PerspectiveCamera camera(rt::Vec3(0, 0, 8), rt::Vec3(0, 0, 0), rt::Vec3(0, 1, 0), 60, 16.0 / 9.0);
     rt::Scene scene;
 
     scene.add(std::make_shared<rt::Sphere>(std::make_shared<rt::Diffuse>(rt::Color3::ORANGE()), rt::Vec3(0, 0, 0), 1));
+    scene.add(std::make_shared<rt::Sphere>(std::make_shared<rt::Reflective>(rt::Color3::AQUA(), 0.1), rt::Vec3(2.5, 0, 0), 1));
+    scene.add(std::make_shared<rt::Sphere>(std::make_shared<rt::Reflective>(rt::Color3::AZURE(), 1.0), rt::Vec3(-2.5, 0, 0), 1));
     scene.add(std::make_shared<rt::Plane>(std::make_shared<rt::Diffuse>(rt::Color3::FORESTGREEN()), rt::Vec3(0, -1, 0)));
 
     rt::Image render = renderer.render(scene, camera);

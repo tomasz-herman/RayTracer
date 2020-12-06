@@ -38,6 +38,7 @@ namespace rt {
         [[nodiscard]] double distance(const Vec3& other) const;
         [[nodiscard]] double dot(const Vec3& other) const;
         [[nodiscard]] Vec3 cross(const Vec3& other) const;
+        [[nodiscard]] Vec3 reflect(const Vec3& other) const;
 
         friend std::ostream &operator<<(std::ostream &stream, const Vec3 &vector);
     };

@@ -111,6 +111,10 @@ namespace rt {
                     x * other.y - y * other.x);
     }
 
+    Vec3 Vec3::reflect(const Vec3& other) const {
+        return *this - 2 * this->dot(other) * other;
+    }
+
     std::ostream &operator<<(std::ostream &stream, const Vec3 &vector) {
         stream << "(x:" << vector.x << ", y:" << vector.y << ", z:" << vector.z << ")";
         return stream;
