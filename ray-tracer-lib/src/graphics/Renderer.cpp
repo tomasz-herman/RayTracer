@@ -1,14 +1,16 @@
 #include <rt/math/Utils.h>
 #include <spdlog/spdlog.h>
 #include <spdlog/stopwatch.h>
+#include <rt/math/Vec2.h>
+#include <rt/sampling/Sampler2.h>
+#include <rt/sampling/ThreadSafeSampler.h>
 #include "rt/graphics/Renderer.h"
-#include "rt/sampling/Sampler2.h"
 
 namespace rt {
     Renderer::Renderer(int resolution, int samples, int max_depth) : resolution(resolution), samples(samples), max_depth(max_depth) { }
 
     Image Renderer::render(const Scene& scene, const Camera& camera) const {
-        Sampler2 sampler = Sampler2(Sampler2::jitter, samples);
+        ThreadSafeSampler<Vec2> sampler = ThreadSafeSampler<Vec2>(Sampler2::jitter, samples);
         int width = resolution;
         int height = static_cast<int>(resolution / camera.get_aspect());
         Image render(width, height);
