@@ -13,7 +13,9 @@ namespace rt {
     template <class T>
     class ThreadSafeSampler : public AbstractSampler<T> {
     public:
-        ThreadSafeSampler(const std::function<std::valarray<T>(int)> &generator, int count, int sets = 1, const std::function<T(T)> &mapping = std::identity()) : AbstractSampler<T>(generator, count, sets, mapping) {}
+        ThreadSafeSampler(const std::function<std::valarray<T>(int)> &generator, int count, int sets = 1, const std::function<T(T)> &mapping = std::identity()) : AbstractSampler<T>(generator, count, sets, mapping) {
+            distribution = std::uniform_int_distribution<int>(0, sets - 1);
+        }
 
         [[nodiscard]] T get_sample() {
             if(tlf.sample >= AbstractSampler<T>::count) {
