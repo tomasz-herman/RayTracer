@@ -3,30 +3,32 @@
 #include <spdlog/stopwatch.h>
 #include <rt/math/Vec2.h>
 #include <rt/sampling/Sampler2.h>
-#include <rt/sampling/ThreadSafeSampler.h>
+#include <rt/sampling/Sampler.h>
 #include "rt/graphics/Renderer.h"
 
 namespace rt {
     Renderer::Renderer(int resolution, int samples, int max_depth) : resolution(resolution), samples(samples), max_depth(max_depth) { }
 
-    Image Renderer::render(const Scene& scene, const Camera& camera) const {
-        ThreadSafeSampler<Vec2> sampler = ThreadSafeSampler<Vec2>(Sampler2::jitter, samples);
+    Image Renderer::render(const Scene& scene, const Camera& camera, bool use_threads) const {
+        Sampler<Vec2> sampler = Sampler<Vec2>(Sampler2::jitter, samples);
         int width = resolution;
         int height = static_cast<int>(resolution / camera.get_aspect());
         Image render(width, height);
         spdlog::info("Rendering scene to image. Using {} samples. Max depth is {}. Resolution is {}x{}.", samples, max_depth, width, height);
         spdlog::stopwatch sw;
-        for(int i = 0; i < width; i++) {
-            for(int j = 0; j < height; j++) {
-                for (int k = 0; k < samples; ++k) {
-                    Vec2 sample = sampler.get_sample();
-                    double u = (double) (i + sample.x) / (width - 1);
-                    double v = (double) (j + sample.y) / (height - 1);
-                    Ray ray = camera.get_ray(u, v);
-                    render(i, j) += shade(ray, scene, max_depth);
+        parallel_for(width, [&](int start, int end){
+            for(int i = start; i < end; ++i) {
+                for(int j = 0; j < height; j++) {
+                    for (int k = 0; k < samples; ++k) {
+                        Vec2 sample = sampler.get_sample();
+                        double u = (double) (i + sample.x) / (width - 1);
+                        double v = (double) (j + sample.y) / (height - 1);
+                        Ray ray = camera.get_ray(u, v);
+                        render(i, j) += shade(ray, scene, max_depth);
+                    }
                 }
             }
-        }
+        }, use_threads);
         render.process([&](Color3 c) { return c / samples; });
         spdlog::info("Render finished in {:.3}s.", sw);
         return render;

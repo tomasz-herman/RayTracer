@@ -2,7 +2,7 @@
 
 namespace rt {
 
-    Reflective::Reflective(Color3 albedo, double fuzz, Sampler3 sampler) : albedo(albedo), fuzz(fuzz), sampler(std::move(sampler)) { }
+    Reflective::Reflective(Color3 albedo, double fuzz, Sampler<Vec3> sampler) : albedo(albedo), fuzz(fuzz), sampler(std::move(sampler)) { }
 
     bool Reflective::scatter(const Ray &in, const hit &hit, Color3 &attenuation, Ray &out) {
         Vec3 reflected = in.direction.reflect(hit.normal);

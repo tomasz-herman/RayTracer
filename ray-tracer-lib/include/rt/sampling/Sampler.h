@@ -1,28 +1,40 @@
 #ifndef RAYTRACER_SAMPLER_H
 #define RAYTRACER_SAMPLER_H
 
-#include "AbstractSampler.h"
-
 namespace rt {
+    inline thread_local struct ThreadLocalFields {
+        int sample = 0;
+        int set = 0;
+        std::mt19937 rand = random_generator();
+    } ThreadLocalFields; // NOLINT(cert-err58-cpp)
+
     template <class T>
-    class Sampler : public AbstractSampler<T> {
+    class Sampler {
     public:
-        Sampler(const std::function<std::valarray<T>(int)> &generator, int count, int sets = 1, const std::function<T(T)> &mapping = std::identity()) : AbstractSampler<T>(generator, count, sets, mapping), sample(0), set(0) {
+        Sampler(const std::function<std::valarray<T>(int)> &generator, int count, int sets = 1, const std::function<T(T)> &mapping = std::identity()) : count(count), sets(sets) {
             distribution = std::uniform_int_distribution<int>(0, sets - 1);
+            samples = std::valarray<std::valarray<T>>(sets);
+            for (int i = 0; i < sets; ++i) {
+                samples[i] = generator(count);
+                for (int j = 0; j < count; ++j) {
+                    samples[i][j] = mapping(samples[i][j]);
+                }
+            }
         }
 
         [[nodiscard]] T get_sample() {
-            if(sample >= AbstractSampler<T>::count) {
-                sample = 0;
-                if(AbstractSampler<T>::sets > 1) set = distribution(rand);
+            if(tlf.sample >= count) {
+                tlf.sample = 0;
+                if(sets > 1) tlf.set = distribution(tlf.rand);
             }
-            return AbstractSampler<T>::samples[set][sample++];
+            return samples[tlf.set][tlf.sample++];
         }
 
     private:
-        int sample, set;
         std::uniform_int_distribution<int> distribution;
-        std::mt19937 rand = random_generator();
+        struct ThreadLocalFields tlf;
+        int count, sets;
+        std::valarray<std::valarray<T>> samples;
     };
 }
 

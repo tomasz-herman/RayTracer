@@ -10,7 +10,7 @@ namespace rt {
     public:
         Renderer(int resolution, int samples, int max_depth);
 
-        [[nodiscard]] Image render(const Scene& scene, const Camera& camera) const;
+        [[nodiscard]] Image render(const Scene& scene, const Camera& camera, bool use_threads = true) const;
         [[nodiscard]] Color3 shade(const Ray& ray, const Scene& scene, int depth) const;
     private:
         int resolution;
