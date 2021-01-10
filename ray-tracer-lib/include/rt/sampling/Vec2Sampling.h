@@ -1,36 +1,14 @@
-#include <cmath>
-#include <random>
-#include "rt/sampling/Sampler2.h"
+#ifndef RAYTRACER_VEC2SAMPLING_H
+#define RAYTRACER_VEC2SAMPLING_H
 
-namespace rt {
-    Sampler2::Sampler2(const std::function<std::valarray<Vec2>(int)> &generator, int count, int sets, const std::function<Vec2(Vec2)> &mapping) : count(count), current(0), sets(sets), set(0) {
-        distribution = std::uniform_int_distribution<int>(0, sets - 1);
-        samples = std::valarray<std::valarray<Vec2>>(sets);
-        for (int i = 0; i < sets; ++i) {
-            samples[i] = generator(count);
-            for (int j = 0; j < count; ++j) {
-                samples[i][j] = mapping(samples[i][j]);
-            }
-        }
-    }
+#include <rt/math/Vec2.h>
+#include <functional>
+#include <memory>
+#include <rt/math/Utils.h>
+#include <valarray>
 
-    Vec2 Sampler2::get_sample() {
-        if(current >= count) {
-            current = 0;
-            if(sets > 1) set = distribution(rand);
-        }
-        return samples[set][current++];
-    }
-
-    Vec2 Sampler2::get_sample(int i) const {
-        return samples[set][i];
-    }
-
-    int Sampler2::get_count() const {
-        return count;
-    }
-
-    std::valarray<Vec2> Sampler2::dummy(int count) {
+namespace rt::Vec2Sampling {
+    static std::valarray<Vec2> dummy(int count) {
         std::valarray<Vec2> samples = std::valarray<Vec2>(count);
         for (int i = 0; i < count; ++i) {
             samples[i].x = samples[i].y = 0.5;
@@ -38,7 +16,7 @@ namespace rt {
         return samples;
     }
 
-    std::valarray<Vec2> Sampler2::random(int count) {
+    static std::valarray<Vec2> random(int count) {
         std::uniform_real_distribution<double> distribution(0.0, 1.0);
         std::mt19937 generator(std::random_device{}());
         std::valarray<Vec2> samples = std::valarray<Vec2>(count);
@@ -49,7 +27,7 @@ namespace rt {
         return samples;
     }
 
-    std::valarray<Vec2> Sampler2::regular(int count) {
+    static std::valarray<Vec2> regular(int count) {
         int size = ceil(sqrt(count));
         std::valarray<Vec2> samples = std::valarray<Vec2>(size * size);
         for (int i = 0; i < size; ++i) {
@@ -61,7 +39,7 @@ namespace rt {
         return samples;
     }
 
-    std::valarray<Vec2> Sampler2::jitter(int count) {
+    static std::valarray<Vec2> jitter(int count) {
         std::uniform_real_distribution<double> distribution(0.0, 1.0);
         std::mt19937 generator(std::random_device{}());
         int size = ceil(sqrt(count));
@@ -75,11 +53,11 @@ namespace rt {
         return samples;
     }
 
-    Vec2 Sampler2::wide_range(Vec2 sample) {
+    static Vec2 wide_range(Vec2 sample) {
         return Vec2(sample.x * 2 - 1, sample.y * 2 - 1);
     }
 
-    Vec2 Sampler2::to_disk(Vec2 sample) {
+    static Vec2 to_disk(Vec2 sample) {
         sample = wide_range(sample);
         double r, phi;
         if(sample.x > -sample.y) {
@@ -106,3 +84,5 @@ namespace rt {
         return Vec2(r * cos(phi), r * sin(phi));
     }
 }
+
+#endif //RAYTRACER_VEC2SAMPLING_H

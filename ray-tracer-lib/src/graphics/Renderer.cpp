@@ -2,7 +2,7 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/stopwatch.h>
 #include <rt/math/Vec2.h>
-#include <rt/sampling/Sampler2.h>
+#include <rt/sampling/Vec2Sampling.h>
 #include <rt/sampling/Sampler.h>
 #include "rt/graphics/Renderer.h"
 
@@ -10,7 +10,7 @@ namespace rt {
     Renderer::Renderer(int resolution, int samples, int max_depth) : resolution(resolution), samples(samples), max_depth(max_depth) { }
 
     Image Renderer::render(const Scene& scene, const Camera& camera, bool use_threads) const {
-        Sampler<Vec2> sampler = Sampler<Vec2>(Sampler2::jitter, samples);
+        Sampler<Vec2> sampler = Sampler<Vec2>(Vec2Sampling::jitter, samples);
         int width = resolution;
         int height = static_cast<int>(resolution / camera.get_aspect());
         Image render(width, height);
@@ -34,15 +34,15 @@ namespace rt {
         return render;
     }
 
-    Color3 Renderer::shade(const Ray &r, const Scene &scene, int depth) const {
+    Color3 Renderer::shade(const Ray &ray, const Scene &scene, int depth) const {
         if(depth == 0) return Color3::BLACK();
 
-        hit hit;
+        Hit hit;
 
-        if(scene.hit_test(r, hit, 0.001, INF)) {
+        if(scene.hit_test(ray, hit, 0.001, INF)) {
             Ray scattered((Vec3()), Vec3());
             Color3 attenuation;
-            if(hit.material_ptr->scatter(r, hit, attenuation, scattered)) {
+            if(hit.material_ptr->scatter(ray, hit, attenuation, scattered)) {
                 return attenuation * shade(scattered, scene, depth - 1);
             }
             return Color3::BLACK();

@@ -8,7 +8,7 @@ namespace rt {
     public:
         explicit Plane(std::shared_ptr<Material> material_ptr, Vec3 position = Vec3(), Vec3 normal = Vec3(0, 1, 0));
 
-        bool hit_test(const Ray &ray, hit &hit, double from, double to) const override;
+        bool hit_test(const Ray &ray, Hit &hit, double from, double to) const override;
     private:
         Vec3 position;
         Vec3 normal;

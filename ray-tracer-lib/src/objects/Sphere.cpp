@@ -5,7 +5,7 @@ namespace rt {
     Sphere::Sphere(std::shared_ptr<Material> material_ptr, Vec3 position, double radius) : material_ptr(std::move(material_ptr)), position(position), radius(radius) { }
     Sphere::Sphere(std::shared_ptr<Material> material_ptr, double x, double y, double z, double radius) : material_ptr(std::move(material_ptr)), position(Vec3(x, y, z)), radius(radius) {}
 
-    bool Sphere::hit_test(const Ray& ray, hit& hit, double from, double to) const {
+    bool Sphere::hit_test(const Ray& ray, Hit& hit, double from, double to) const {
         Vec3 oc = ray.origin - position;
         double a = ray.direction.length_squared();
         double half_b = oc.dot(ray.direction);

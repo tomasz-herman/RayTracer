@@ -9,7 +9,7 @@ namespace rt {
         explicit Sphere(std::shared_ptr<Material> material_ptr, Vec3 position = Vec3(), double radius = 1.0);
         Sphere(std::shared_ptr<Material> material_ptr, double x, double y, double z, double radius = 1.0);
 
-        [[nodiscard]] bool hit_test(const Ray& ray, hit& hit, double from, double to) const override;
+        [[nodiscard]] bool hit_test(const Ray& ray, Hit& hit, double from, double to) const override;
     private:
         Vec3 position;
         double radius;

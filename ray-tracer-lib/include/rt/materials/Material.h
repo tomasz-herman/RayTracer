@@ -6,10 +6,11 @@
 #include <rt/math/Color3.h>
 
 namespace rt {
-    class hit;
+    class Hit;
+
     class Material {
     public:
-        virtual bool scatter(const Ray& in, const hit& hit, Color3& attenuation, Ray& out) = 0;
+        virtual bool scatter(const Ray& in, const Hit& hit, Color3& attenuation, Ray& out) = 0;
     };
 }
 

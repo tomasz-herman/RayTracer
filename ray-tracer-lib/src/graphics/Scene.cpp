@@ -11,8 +11,8 @@ namespace rt {
         objects.push_back(obj);
     }
 
-    bool Scene::hit_test(const Ray &ray, hit &hit, double from, double to) const {
-        struct hit temp_hit;
+    bool Scene::hit_test(const Ray &ray, Hit &hit, double from, double to) const {
+        Hit temp_hit;
         bool hit_anything = false;
         double closest = to;
 

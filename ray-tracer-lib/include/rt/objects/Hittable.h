@@ -8,7 +8,7 @@
 namespace rt {
     class Material;
 
-    struct hit {
+    struct Hit {
         Vec3 position;
         Vec3 normal;
         std::shared_ptr<Material> material_ptr;
@@ -17,7 +17,7 @@ namespace rt {
 
     class Hittable {
     public:
-        [[nodiscard]] virtual bool hit_test(const Ray& ray, hit& hit, double from, double to) const = 0;
+        [[nodiscard]] virtual bool hit_test(const Ray& ray, Hit& hit, double from, double to) const = 0;
     };
 }
 

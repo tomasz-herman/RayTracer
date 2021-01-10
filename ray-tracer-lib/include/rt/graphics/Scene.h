@@ -11,7 +11,7 @@ namespace rt {
         explicit Scene(const Color3& sky_color = Color3::LIGHTSKYBLUE());
         void clear();
         void add(const std::shared_ptr<Hittable>& obj);
-        bool hit_test(const Ray &r, hit &hit, double from, double to) const override;
+        bool hit_test(const Ray &r, Hit &hit, double from, double to) const override;
         [[nodiscard]] const Color3& get_sky_color() const;
         void set_sky_color(const Color3 &skyColor);
     private:
