@@ -19,7 +19,10 @@ set(HEADER_LIST
         include/rt/sampling/Vec2Sampling.h
         include/rt/sampling/Vec3Sampling.h
         include/rt/materials/Reflective.h
-        include/rt/sampling/Sampler.h)
+        include/rt/sampling/Sampler.h
+        include/rt/utils/StringUtils.h
+        include/rt/utils/ConcurrentUtils.h
+        include/rt/utils/Printable.h)
 set(SOURCE_LIST
         src/math/Vec3.cpp
         src/math/Color3.cpp

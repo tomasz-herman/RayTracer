@@ -10,6 +10,7 @@ namespace rt {
         Sphere(std::shared_ptr<Material> material_ptr, double x, double y, double z, double radius = 1.0);
 
         [[nodiscard]] bool hit_test(const Ray& ray, Hit& hit, double from, double to) const override;
+    protected:void print(std::ostream& stream, int indent) const override;
     private:
         Vec3 position;
         double radius;

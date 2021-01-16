@@ -4,7 +4,9 @@
 #include <rt/math/Vec2.h>
 #include <rt/sampling/Vec2Sampling.h>
 #include <rt/sampling/Sampler.h>
+#include <rt/utils/ConcurrentUtils.h>
 #include "rt/graphics/Renderer.h"
+#include <fmt/ostream.h>
 
 namespace rt {
     Renderer::Renderer(int resolution, int samples, int max_depth) : resolution(resolution), samples(samples), max_depth(max_depth) { }
@@ -15,6 +17,7 @@ namespace rt {
         int height = static_cast<int>(resolution / camera.get_aspect());
         Image render(width, height);
         spdlog::info("Rendering scene to image. Using {} samples. Max depth is {}. Resolution is {}x{}.", samples, max_depth, width, height);
+        spdlog::info("The scene is: \n{}", scene);
         spdlog::stopwatch sw;
         parallel_for(width, [&](int start, int end){
             for(int i = start; i < end; ++i) {

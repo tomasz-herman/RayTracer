@@ -6,7 +6,7 @@
 #include <memory>
 
 namespace rt {
-    class Scene : Hittable {
+    class Scene : public Hittable {
     public:
         explicit Scene(const Color3& sky_color = Color3::LIGHTSKYBLUE());
         void clear();
@@ -14,6 +14,8 @@ namespace rt {
         bool hit_test(const Ray &r, Hit &hit, double from, double to) const override;
         [[nodiscard]] const Color3& get_sky_color() const;
         void set_sky_color(const Color3 &skyColor);
+    protected:
+        void print(std::ostream& stream, int indent) const override;
     private:
         std::vector<std::shared_ptr<Hittable>> objects;
         Color3 sky_color;

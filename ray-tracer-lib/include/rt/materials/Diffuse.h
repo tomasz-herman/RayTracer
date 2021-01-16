@@ -8,9 +8,10 @@
 namespace rt {
     class Diffuse : public Material {
     public:
-        explicit Diffuse(Color3 albedo, Sampler<Vec3> sampler = Sampler<Vec3>(Vec3Sampling::uniform_sphere, 125, 8));
+        explicit Diffuse(Color3 albedo, Sampler<Vec3> sampler = Sampler<Vec3>(Vec3Sampling::uniform_sphere, 125, 1));
 
         bool scatter(const Ray &in, const Hit &hit, Color3 &attenuation, Ray &out) override;
+        void print(std::ostream& stream, int indent) const override;
     private:
         Color3 albedo;
         Sampler<Vec3> sampler;

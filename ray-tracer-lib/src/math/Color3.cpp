@@ -1,10 +1,14 @@
 #include <cmath>
+#include <rt/utils/StringUtils.h>
 #include "rt/math/Color3.h"
 
 namespace rt {
     Color3::Color3() : r(0), g(0), b(0) {}
+
     Color3::Color3(double gray) : r(gray), g(gray), b(gray) {}
+
     Color3::Color3(double r, double g, double b) : r(r), g(g), b(b) {}
+
     Color3::Color3(int r, int g, int b) : Color3(r / 255.0, g / 255.0, b / 255.0) {}
 
     Color3 &Color3::add(const Color3 &other) {
@@ -28,7 +32,7 @@ namespace rt {
         return *this;
     }
 
-    Color3 &Color3::mul(const Color3& other) {
+    Color3 &Color3::mul(const Color3 &other) {
         r *= other.r;
         g *= other.g;
         b *= other.b;
@@ -86,9 +90,12 @@ namespace rt {
         return !(*this == other);
     }
 
-    std::ostream &operator<<(std::ostream &stream, const Color3 &color3) {
-        stream << "(r:" << color3.r << ", g:" << color3.g << ", b:" << color3.b << ")";
-        return stream;
+    void Color3::print(std::ostream &stream, int indent) const {
+        stream << two_spaces(indent) << "{" << std::endl
+               << two_spaces(indent + 1) << "\"r\": " << r << "," << std::endl
+               << two_spaces(indent + 1) << "\"g\": " << g << "," << std::endl
+               << two_spaces(indent + 1) << "\"b\": " << b << std::endl
+               << two_spaces(indent) << "}";
     }
 
     std::array<double, 3> Color3::hsb_to_rgb(double hue, double saturation, double brightness) {

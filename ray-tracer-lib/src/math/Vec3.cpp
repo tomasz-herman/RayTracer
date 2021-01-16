@@ -1,43 +1,44 @@
 #include <rt/math/Vec3.h>
 #include <cmath>
+#include <rt/utils/StringUtils.h>
 
 namespace rt {
     Vec3::Vec3() : x(0), y(0), z(0) {}
     Vec3::Vec3(double x, double y, double z) : x(x), y(y), z(z) {}
 
-    Vec3& Vec3::add(const Vec3 &other) {
+    Vec3 &Vec3::add(const Vec3 &other) {
         x += other.x;
         y += other.y;
         z += other.z;
         return *this;
     }
 
-    Vec3& Vec3::sub(const Vec3 &other) {
+    Vec3 &Vec3::sub(const Vec3 &other) {
         x -= other.x;
         y -= other.y;
         z -= other.z;
         return *this;
     }
 
-    Vec3& Vec3::mul(double other) {
+    Vec3 &Vec3::mul(double other) {
         x *= other;
         y *= other;
         z *= other;
         return *this;
     }
 
-    Vec3& Vec3::div(double other) {
+    Vec3 &Vec3::div(double other) {
         x /= other;
         y /= other;
         z /= other;
         return *this;
     }
 
-    Vec3 operator+(Vec3 left, const Vec3& right) {
+    Vec3 operator+(Vec3 left, const Vec3 &right) {
         return left.add(right);
     }
 
-    Vec3 operator-(Vec3 left, const Vec3& right) {
+    Vec3 operator-(Vec3 left, const Vec3 &right) {
         return left.sub(right);
     }
 
@@ -45,7 +46,7 @@ namespace rt {
         return left.mul(right);
     }
 
-    Vec3 operator*(double left, Vec3 right) {
+    Vec3 operator*(double left, const Vec3& right) {
         return right * left;
     }
 
@@ -97,26 +98,29 @@ namespace rt {
         return Vec3(*this) / length();
     }
 
-    double Vec3::distance(const Vec3& other) const {
+    double Vec3::distance(const Vec3 &other) const {
         return (*this - other).length();
     }
 
-    double Vec3::dot(const Vec3& other) const {
+    double Vec3::dot(const Vec3 &other) const {
         return x * other.x + y * other.y + z * other.z;
     }
 
-    Vec3 Vec3::cross(const Vec3& other) const {
+    Vec3 Vec3::cross(const Vec3 &other) const {
         return Vec3(y * other.z - z * other.y,
                     z * other.x - x * other.z,
                     x * other.y - y * other.x);
     }
 
-    Vec3 Vec3::reflect(const Vec3& other) const {
+    Vec3 Vec3::reflect(const Vec3 &other) const {
         return *this - 2 * this->dot(other) * other;
     }
 
-    std::ostream &operator<<(std::ostream &stream, const Vec3 &vector) {
-        stream << "(x:" << vector.x << ", y:" << vector.y << ", z:" << vector.z << ")";
-        return stream;
+    void Vec3::print(std::ostream &stream, int indent) const {
+        stream << two_spaces(indent) << "{" << std::endl
+               << two_spaces(indent + 1) << "\"x\": " << x << "," << std::endl
+               << two_spaces(indent + 1) << "\"y\": " << y << "," << std::endl
+               << two_spaces(indent + 1) << "\"z\": " << z << std::endl
+               << two_spaces(indent) << "}";
     }
 }

@@ -2,9 +2,10 @@
 #define RAYTRACER_VEC3_H
 
 #include <ostream>
+#include <rt/utils/Printable.h>
 
 namespace rt {
-    struct Vec3 {
+    struct Vec3 : public Printable {
         double x, y, z;
 
         Vec3();
@@ -18,7 +19,7 @@ namespace rt {
         friend Vec3 operator+(Vec3 left, const Vec3 &right);
         friend Vec3 operator-(Vec3 left, const Vec3 &right);
         friend Vec3 operator*(Vec3 left, double right);
-        friend Vec3 operator*(double left, Vec3 right);
+        friend Vec3 operator*(double left, const Vec3& right);
         friend Vec3 operator/(Vec3 left, double right);
         friend Vec3 operator-(const Vec3 &vector);
 
@@ -40,7 +41,7 @@ namespace rt {
         [[nodiscard]] Vec3 cross(const Vec3& other) const;
         [[nodiscard]] Vec3 reflect(const Vec3& other) const;
 
-        friend std::ostream &operator<<(std::ostream &stream, const Vec3 &vector);
+        void print(std::ostream& stream, int indent) const override;
     };
 }
 

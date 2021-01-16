@@ -3,9 +3,10 @@
 
 #include <ostream>
 #include <array>
+#include <rt/utils/Printable.h>
 
 namespace rt {
-    struct Color3 {
+    struct Color3 : public Printable {
         static constexpr double DARKER_BRIGHTER_FACTOR = 0.7;
         static constexpr double SATURATE_DESATURATE_FACTOR = 0.7;
 
@@ -37,7 +38,7 @@ namespace rt {
         bool operator==(const Color3& other) const;
         bool operator!=(const Color3& other) const;
 
-        friend std::ostream &operator<<(std::ostream &stream, const Color3 &color);
+        void print(std::ostream& stream, int indent) const override;
 
         static std::array<double, 3> hsb_to_rgb(double hue, double saturation, double brightness);
         static std::array<double, 3> rgb_to_hsv(double r, double g, double b);
